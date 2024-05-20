@@ -1,4 +1,5 @@
 import "./Exceptions.js"
+import "./Contract.js"
 
 class InfractionRegister {
     constructor(id) {
@@ -6,27 +7,7 @@ class InfractionRegister {
     }
 }
 
-class Contract {
-    constructor(driverId, clientId, dateBegin, dateEnd){
-        
-        if (dateBegin > dateEnd)
-            throw ValidationError("Beginning date is posterior to ending date")
-        if (driverId == clientId)
-            throw ValidationError("Driver and Client Ids cannot be the same")
-        
-        this.dateBegin = dateBegin
-        this.dateEnd = dateEnd
-        this.driverId = driverId;
-        this.clientId = clientId;
-    }
-
-    get timeFrame() {
-        return (this.dateBegin, this.dateEnd)
-    }
-
-}
-
-class Driver {
+export class Driver {
     constructor(
         id,
         name,
@@ -76,8 +57,3 @@ class Driver {
         return true
     }
 }
-
-let driver = new Driver(123, "Alberto", "01/02/1995")
-// driver.makeNewContract(123, 123, 0, 100)
-// driver.makeNewContract(123, 321, 0, 100)
-// driver.makeNewContract(123, 321, 0, 100)
