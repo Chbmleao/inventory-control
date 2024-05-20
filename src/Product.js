@@ -24,8 +24,8 @@ export class Product {
     supplierId,
   ){
     try {
-      constructorTypesAreValid(id, description, quantity, priceBought, supplierId);
-      constructorConstrainsAreValid(quantity, priceBought, supplierId, unity);
+      this.constructorTypesAreValid(id, description, quantity, priceBought, supplierId);
+      this.constructorConstrainsAreValid(quantity, priceBought, supplierId, unity);
       
       this.id = id
       this.description = description
@@ -35,7 +35,7 @@ export class Product {
       this.supplierId = supplierId
     
     } catch (error) {
-      console.error(error)
+      throw error
     }
   }
 
