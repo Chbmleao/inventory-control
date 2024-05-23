@@ -2,7 +2,7 @@ import { MongoClient, ServerApiVersion } from 'mongodb'
 import { ValidationError } from './Exceptions.js';
 import { Product } from './Product.js';
 
-const uri = "mongodb+srv://gabriel:VOPZEsNVXJXzIFM9@inventory.7slwdpp.mongodb.net/?retryWrites=true&w=majority&appName=inventory"
+const uri = "mongodb+srv://gabriel:<password>@inventory.7slwdpp.mongodb.net/?retryWrites=true&w=majority&appName=inventory"
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
