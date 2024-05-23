@@ -10,12 +10,8 @@ export default function Home() {
       priceBought: 10,
       supplier: "Supplier 1",
     };
-    try {
-      await axios.post("/api/products", data);
-      alert("Produto criado com sucesso!");
-    } catch (error) {
-      alert("Erro ao criar o produto.");
-    }
+  
+    await axios.post("/api/products", data);
   }
 
   return (
