@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from "react";
 import axios from "axios";
 
@@ -13,6 +13,22 @@ export default function ProductBox({ product, closeProductBox }) {
   const [newPriceBought, setNewPriceBought] = useState(product?.priceBought || "");
   const [newSupplier, setNewSupplier] = useState(product?.supplier || "");
   const [isEditing, setIsEditing] = useState(product ? true : false);
+
+  useEffect(() => {
+    if (product) {
+      setNewDescription(product.description);
+      setNewQuantity(product.quantity);
+      setNewUnity(product.unity);
+      setNewPriceBought(product.priceBought);
+      setNewSupplier(product.supplier);
+    } else {
+      setNewDescription("");
+      setNewQuantity("");
+      setNewUnity("");
+      setNewPriceBought("");
+      setNewSupplier("");
+    }
+  }, [product]);
 
   const handleDescriptionChange = (event) => {
     setNewDescription(event.target.value);

@@ -9,6 +9,7 @@ export default function Table({ products, refreshTable }) {
   const closeProductBox = () => {
     setIsProductBoxOpen(false);
     refreshTable();
+    setSelectedProduct(null);
   }
 
   const onEditClick = (product) => {
