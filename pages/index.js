@@ -9,6 +9,11 @@ export default function Home() {
     getProducts();
   }, []); // Isso garante que a função getProducts seja chamada apenas uma vez, quando o componente for montado
 
+  const refreshTable = () => {
+    getProducts();
+  }
+
+
   async function getProducts() {
     try {
       const response = await axios.get("/api/products");
@@ -24,7 +29,7 @@ export default function Home() {
         Controle de Estoque
       </h1>
       <div className="">
-        <Table products={products} />
+        <Table products={products} refreshTable={refreshTable}/>
       </div>
     </div>
   );

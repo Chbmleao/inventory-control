@@ -2,12 +2,13 @@ import { Card, Typography } from "@material-tailwind/react";
 import ProductBox from "./ProductBox";
 import { useState } from "react";
 
-export default function Table({ products }) {
+export default function Table({ products, refreshTable }) {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isProductBoxOpen, setIsProductBoxOpen] = useState(false);
 
   const closeProductBox = () => {
     setIsProductBoxOpen(false);
+    refreshTable();
   }
 
   const onEditClick = (product) => {
