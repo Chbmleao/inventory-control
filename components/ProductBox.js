@@ -51,31 +51,23 @@ export default function ProductBox({ product, closeProductBox }) {
   };
 
   const handleSave = async () => {
+    
+    const data = {
+      description: newDescription,
+      quantity: newQuantity,
+      unity: newUnity,
+      priceBought: newPriceBought,
+      supplier: newSupplier,
+    }
+    
     if (isEditing) {
-      const data = {
-        description: newDescription,
-        quantity: newQuantity,
-        unity: newUnity,
-        priceBought: newPriceBought,
-        supplier: newSupplier,
-      }  
-
       await axios.put("/api/products", data);
-      
       closeProductBox();
     } else {
-      const data = {
-        description: newDescription,
-        quantity: newQuantity,
-        unity: newUnity,
-        priceBought: newPriceBought,
-        supplier: newSupplier,
-      }
-
       await axios.post("/api/products", data);
-
-      closeProductBox();
     }
+
+    closeProductBox();
 
   }
 
