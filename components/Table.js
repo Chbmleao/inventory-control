@@ -1,10 +1,12 @@
 import { Card, Typography } from "@material-tailwind/react";
 import ProductBox from "./ProductBox";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import SearchInput from "./SearchInput";
 
 export default function Table({ products, refreshTable }) {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isProductBoxOpen, setIsProductBoxOpen] = useState(false);
+  const [searchFilter, setSearchFilter] = useState("");
 
   const closeProductBox = () => {
     setIsProductBoxOpen(false);
@@ -17,8 +19,24 @@ export default function Table({ products, refreshTable }) {
     setIsProductBoxOpen(true);
   }
 
+  const getFilteredProducts = () => {
+    console.log(products);
+
+    if (searchFilter === "") {
+      return products;
+    }
+
+    return products.filter((product) => {
+      const { description, supplier } = product;
+      return description.toLowerCase().includes(searchFilter.toLowerCase()) || supplier.toLowerCase().includes(searchFilter.toLowerCase());
+    });
+  }
+
   return (
     <div className="relative">
+      <div className="mb-5">
+        <SearchInput setSearchFilter={setSearchFilter} />
+      </div>
       <Card className="h-full w-5/6 container mx-auto bg-white rounded-lg">
         <table className="w-full min-w-max table-auto text-left">
           <thead>
@@ -100,12 +118,12 @@ export default function Table({ products, refreshTable }) {
             </tr>
           </thead>
           <tbody>
-            {products.map(({ description, quantity, unity, priceBought, supplier }, index) => {
-              const isLast = index === products.length - 1;
+            {getFilteredProducts().map(({ description, quantity, unity, priceBought, supplier }, index) => {
+              const isLast = index === getFilteredProducts().length - 1;
               const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
   
               return (
-                <tr key={description}>
+                <tr key={description + index}>
                   <td className={classes}>
                     <Typography
                       variant="small"
@@ -171,7 +189,7 @@ export default function Table({ products, refreshTable }) {
           </tbody>
         </table>
       </Card>
-      {isProductBoxOpen && <ProductBox product={selectedProduct} closeProductBox={closeProductBox}/>}
+      {isProductBoxOpen && <ProductBox product={selectedProduct} closeProductBox={closeProductBox} />}
     </div>
   );
 }
