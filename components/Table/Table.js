@@ -42,7 +42,7 @@ export default function Table({ products, refreshTable }) {
         <SearchInput setSearchFilter={setSearchFilter} />
       </div>
       <div className="p-2 w-5/6 container mx-auto bg-white rounded-lg">
-        <Card className="p-3 overflow-scroll" style={{ height: '65vh'}}>
+        <Card className="p-3 overflow-auto" style={{ height: '65vh'}}>
           <table className="w-full min-w-max table-auto text-left">
             <thead>
               <tr>
