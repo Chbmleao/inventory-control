@@ -68,12 +68,10 @@ export default function ProductBox({ product, closeProductBox }) {
     }
 
     closeProductBox();
-
   }
 
-
   return (
-    <div className="fixed bg-gray-900 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/4 p-4 shadow-lg rounded-lg z-20 w-1/3">
+    <div className="product-box fixed bg-gray-900 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/4 p-4 shadow-lg rounded-lg z-20 w-1/3">
       <div className="w-full h-1/2 rounded-lg mt-8 mb-8">
         {isEditing ? (
           <h1 className="text-2xl font-bold text-center text-white mb-5">
