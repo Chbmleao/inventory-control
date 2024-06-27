@@ -85,7 +85,7 @@ export default function ProductBox({ product, closeProductBox }) {
         
         <form className="max-w-sm mx-auto">
           <div> 
-            <label htmlFor="small-input" className={firstLabelStyles}>
+            <label htmlFor="description-input" className={firstLabelStyles}>
               Descrição
             </label>
             <input
@@ -97,7 +97,7 @@ export default function ProductBox({ product, closeProductBox }) {
               readOnly={isEditing}
           />
 
-            <label htmlFor="small-input" className={labelStyles}>
+            <label htmlFor="quantity-input" className={labelStyles}>
               Quantidade
             </label>
             <input
@@ -108,7 +108,7 @@ export default function ProductBox({ product, closeProductBox }) {
               onChange={handleQuantityChange}
             />
 
-            <label htmlFor="small-input" className={labelStyles}>
+            <label htmlFor="unity-input" className={labelStyles}>
               Unidade
             </label>
             <input
@@ -119,7 +119,7 @@ export default function ProductBox({ product, closeProductBox }) {
               onChange={handleUnityChange}
             />
 
-            <label htmlFor="small-input" className={labelStyles}>
+            <label htmlFor="priceBought-input" className={labelStyles}>
               Preço de compra
             </label>
             <input
@@ -130,7 +130,7 @@ export default function ProductBox({ product, closeProductBox }) {
               onChange={handlePriceBoughtChange}
             />
 
-            <label htmlFor="small-input" className={labelStyles}>
+            <label htmlFor="supplier-input" className={labelStyles}>
               Fornecedor
             </label>
             <input
