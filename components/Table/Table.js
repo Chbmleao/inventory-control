@@ -1,3 +1,4 @@
+import React from "react";
 import { Card, Typography } from "@material-tailwind/react";
 import ProductBox from "../ProductBox/ProductBox";
 import { useState, useEffect } from "react";
@@ -113,6 +114,7 @@ export default function Table({ products, refreshTable }) {
                       variant="small"
                       color="blue-gray"
                       className="font-medium"
+                      data-testid="add-product-button"
                       onClick={(ev) => { ev.preventDefault(); setIsProductBoxOpen(true); }}
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -182,6 +184,7 @@ export default function Table({ products, refreshTable }) {
                           variant="small"
                           color="blue-gray"
                           className="font-medium"
+                          data-testid={"edit-product-button_" + index}
                           onClick={(ev) => { ev.preventDefault(); onEditClick({ description, quantity, unity, priceBought, supplier })}}
                         >
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" class="size-6">
@@ -194,6 +197,7 @@ export default function Table({ products, refreshTable }) {
                           variant="small"
                           color="blue-gray"
                           className="font-medium"
+                          data-testid={"delete-product-button_" + index}
                           onClick={(ev) => { ev.preventDefault(); onDeleteClick(_id)}}
                         >
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" class="size-6">

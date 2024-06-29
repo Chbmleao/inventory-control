@@ -147,6 +147,7 @@ export default function ProductBox({ product, closeProductBox }) {
         <button
           onClick={closeProductBox}
           className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2"
+          data-testid="cancel-button"
         >
           Cancelar
         </button>
