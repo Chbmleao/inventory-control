@@ -1,4 +1,4 @@
-name: yarn build
+name: CI/CD Workflow
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        node: [16]
+        node: [20]
 
     steps:
       - name: Checkout repository
