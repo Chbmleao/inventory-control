@@ -25,14 +25,23 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
+      - name: Install yarn
+        run: npm install --global yarn
+
       - name: Install dependencies
         run: npm install
       
+      - name: Install yarn
+        run: yarn install
+
       - name: Run unit tests
         run: npm run test:unit
 
       - name: Run integration tests
         run: npm run test:integration
+
+      - name: Build project
+        run: npm run build
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
