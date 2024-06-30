@@ -26,16 +26,16 @@ jobs:
           node-version: ${{ matrix.node }}
 
       - name: Install dependencies
-        run: yarn install
+        run: npm install
 
       - name: Run lint
-        run: yarn lint
+        run: npm lint
 
       - name: Run tests
-        run: yarn test
+        run: npm test
 
       - name: Build project
-        run: yarn build
+        run: npm build
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
@@ -64,7 +64,7 @@ jobs:
           path: .next
 
       - name: Install dependencies
-        run: yarn install
+        run: npm install
 
       - name: start
-        run: yarn start
+        run: npm start
