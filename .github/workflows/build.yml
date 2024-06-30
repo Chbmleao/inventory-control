@@ -1,4 +1,4 @@
-name: yarn build
+name: CI/CD Workflow
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        node: [16]
+        node: [18]
 
     steps:
       - name: Checkout repository
@@ -29,13 +29,13 @@ jobs:
         run: npm install
 
       - name: Run lint
-        run: npm lint
+        run: npm run lint
 
       - name: Run tests
         run: npm test
 
       - name: Build project
-        run: npm build
+        run: npm run build
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
@@ -66,5 +66,5 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: start
+      - name: deploy
         run: npm start
