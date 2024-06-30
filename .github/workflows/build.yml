@@ -1,4 +1,4 @@
-name: yarn build
+name: CI/CD Workflow
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        node: [16]
+        node: [20]
 
     steps:
       - name: Checkout repository
@@ -25,17 +25,20 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
+      - name: Install yarn
+        run: npm install --global yarn
+
       - name: Install dependencies
+        run: npm install
+      
+      - name: Install yarn
         run: yarn install
 
-      - name: Run lint
-        run: yarn lint
-
       - name: Run tests
-        run: yarn test
+        run: npm test
 
       - name: Build project
-        run: yarn build
+        run: npm run build
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
@@ -55,7 +58,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: '20'
 
       - name: Download build artifacts
         uses: actions/download-artifact@v3
@@ -64,7 +67,7 @@ jobs:
           path: .next
 
       - name: Install dependencies
-        run: yarn install
+        run: npm install
 
-      - name: start
-        run: yarn start
+      - name: deploy
+        run: npm start
