@@ -7,9 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest",
-    "test:unit": "jest --testPathPattern=unit",
-    "test:integration": "jest --testPathPattern=integration",
+    "test": "jest --silent",
+    "test:unit": "jest --testPathPattern=unit --silent",
+    "test:integration": "jest --testPathPattern=integration --silent",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },
