@@ -13,6 +13,7 @@ export default function ProductBox({ product, closeProductBox }) {
   const [newPriceBought, setNewPriceBought] = useState(product?.priceBought || "");
   const [newSupplier, setNewSupplier] = useState(product?.supplier || "");
   const [isEditing, setIsEditing] = useState(product ? true : false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (product) {
@@ -51,6 +52,26 @@ export default function ProductBox({ product, closeProductBox }) {
   };
 
   const handleSave = async () => {
+    if (
+      newDescription === "" ||
+      newQuantity === "" ||
+      newUnity === "" ||
+      newPriceBought === "" ||
+      newSupplier === ""
+    ) {
+      setError('All fields are required');
+      return;
+    }
+
+    if (isNaN(newQuantity) || isNaN(newPriceBought)) {
+      setError('Quantity and Price Bought must be numbers');
+      return;
+    }
+
+    if (newQuantity < 0 || newPriceBought < 0) {
+      setError('Quantity and Price Bought must be positive numbers');
+      return;
+    }
     
     const data = {
       description: newDescription,
@@ -59,7 +80,7 @@ export default function ProductBox({ product, closeProductBox }) {
       priceBought: newPriceBought,
       supplier: newSupplier,
     }
-    
+
     if (isEditing) {
       await axios.put("/api/products", data);
       closeProductBox();
@@ -72,6 +93,7 @@ export default function ProductBox({ product, closeProductBox }) {
 
   return (
     <div className="product-box fixed bg-gray-900 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/4 p-4 shadow-lg rounded-lg z-20 w-1/3">
+      {error && <p>{error}</p>}
       <div className="w-full h-1/2 rounded-lg mt-8 mb-8">
         {isEditing ? (
           <h1 className="text-2xl font-bold text-center text-white mb-5">

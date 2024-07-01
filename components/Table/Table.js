@@ -213,7 +213,7 @@ export default function Table({ products, refreshTable }) {
           </table>
         </Card>
       </div>
-      {isProductBoxOpen && <ProductBox product={selectedProduct} closeProductBox={closeProductBox} />}
+      {isProductBoxOpen && <ProductBox product={selectedProduct} closeProductBox={closeProductBox} data-testid="product-box" />}
     </div>
   );
 }

@@ -129,5 +129,70 @@ describe("ProductBox", () => {
     });
     expect(mockPost).toHaveBeenCalledTimes(1);
   });
+
+  it("should throw an error when saving a product with invalid fields", async () => {
+    jest.spyOn(axios, "put").mockResolvedValueOnce({ data: {} });
+    jest.spyOn(axios, "post").mockResolvedValueOnce({ data: {} });
+
+    render(<ProductBox closeProductBox={() => {}} />);
+
+    // Simulate invalid fields
+    fireEvent.change(screen.getByLabelText("Descrição"), { target: { value: -1 } });
+    fireEvent.change(screen.getByLabelText("Quantidade"), { target: { value: "Teste Erro" } });
+    fireEvent.change(screen.getByLabelText("Unidade"), { target: { value: -1 } });
+    fireEvent.change(screen.getByLabelText("Preço de compra"), { target: { value: "Teste Erro" } });
+    fireEvent.change(screen.getByLabelText("Fornecedor"), { target: { value: -1 } });
+
+    // Trigger save action
+    const saveButton = screen.getByText("Salvar");
+
+    // Click the save button
+    await waitFor(() => {
+      fireEvent.click(saveButton);
+    });
+
+    // Verify error message
+    const errorMessage = await screen.getByText("Quantity and Price Bought must be numbers");
+    expect(errorMessage).toBeInTheDocument();
+  });
+
+  it("should display an error message when saving a product with missing fields", async () => {
+    render(<ProductBox closeProductBox={() => {}} />);
+
+    // Trigger save action
+    const saveButton = screen.getByText("Salvar");
+
+    // Click the save button
+    await waitFor(() => {
+      fireEvent.click(saveButton);
+    });
+
+    // Verify error message
+    const errorMessage = await screen.getByText("All fields are required");
+    expect(errorMessage).toBeInTheDocument();
+  });
+
+  it ("should display an error message when saving a product with negative quantity or price", async () => {
+    render(<ProductBox closeProductBox={() => {}} />);
+
+    // Simulate changes in input fields
+    fireEvent.change(screen.getByLabelText("Quantidade"), { target: { value: -1 } });
+    fireEvent.change(screen.getByLabelText("Preço de compra"), { target: { value: -1 } });
+    fireEvent.change(screen.getByLabelText("Descrição"), { target: { value: "Teste" } });
+    fireEvent.change(screen.getByLabelText("Unidade"), { target: { value: "Teste" } });
+    fireEvent.change(screen.getByLabelText("Fornecedor"), { target: { value: "Teste" } });
+
+    // Trigger save action
+    const saveButton = screen.getByText("Salvar");
+
+    // Click the save button
+    await waitFor(() => {
+      fireEvent.click(saveButton);
+    });
+
+    // Verify error message
+    const errorMessage = await screen.getByText("Quantity and Price Bought must be positive numbers");
+    expect(errorMessage).toBeInTheDocument();
+  });
 });
 
